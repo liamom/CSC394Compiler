@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lex">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Lex::CharClass">
+        <TypeIdentifier>
+          <NewMemberFileName>Lex.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Lex::Token" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Lex.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="Lex::Lexeme" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Lex.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAoAAAAAAAAAAAIAAAAAgAAAAAACAAAAACA=</HashCode>
+      <FileName>Lex.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

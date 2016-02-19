@@ -1,0 +1,7 @@
+program program3;
+  integer->base,power,out;
+begin
+  base  <= 5;
+  power <= 3;
+  out   <= base + base + base;
+end.

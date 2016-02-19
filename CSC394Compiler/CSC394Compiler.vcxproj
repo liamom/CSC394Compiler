@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="program2.in" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,8 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="front.in" />
+    <None Include="program1.in" />
+    <None Include="program3.in" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,51 +6,56 @@
 #include <string>
 #include <vector>
 
-class Lex
+namespace LexAnalyzer
+{
+
+enum class CharClass {
+  kLetter,
+  kDidit,
+  kUnderscore,
+  kUnknown,
+  kEof = EOF //-1
+};
+
+enum class Token : char {
+  kProgram = 0,
+  kBegin = 1,
+  kEnd = 2,
+  kIntLiteral = 3,
+  kId = 4,
+  kInteger = 5,
+  kDeclarer = 6,    // '->'
+  kAssignOp = '<',  // '<='   
+  kAddOp = '+',
+  kSubOp = '-',
+  kMultOp = '*',
+  kDivOp = '/',
+  kLeftParen = '(',
+  kRightParen = ')',
+  kSemiColon = ';',
+  kPeriod = '.',
+  kComma = ',',
+  kEof = EOF  //-1
+};
+
+class Lexeme : public std::string
 {
 public:
-  enum class CharClass {
-    kLetter,
-    kDidit,
-    kUnderscore,
-    kUnknown,
-    kEof     = EOF //-1
-  };
-
-  enum class Token : char {
-    kProgram    = 0,
-    kBegin      = 1,
-    kEnd        = 2,
-    kIntLiteral = 3,
-    kId         = 4,
-    kInteger    = 5,
-    kDeclarer   = 6,    // '->'
-    kAssignOp   = '<',  // '<='   
-    kAddOp      = '+',   
-    kSubOp      = '-',      
-    kMultOp     = '*',      
-    kDivOp      = '/',   
-    kLeftParen  = '(',      
-    kRightParen = ')',
-    kSemiColon  = ';',
-    kPeriod     = '.',
-    kEof        = EOF  //-1
-  };
-
-  class Lexeme : public std::string
-  {
-  public:
-    void addChar(char c) {
-      if (this->size() <= 98) {
-        this->push_back(c);
-      }
-      else
-        in_error_state = true;
+  void addChar(char c) {
+    if (this->size() <= 98) {
+      this->push_back(c);
     }
+    else
+      in_error_state = true;
+  }
 
-    bool in_error_state = false;
-    Token token;
-  };
+  bool in_error_state = false;
+  Token token;
+};
+
+class Analyzer
+{
+public:
 
   /// <summary>
   /// Reads a file and outputs each lexeme in order to an ostream.
@@ -83,5 +88,9 @@ private:
 private:
   std::fstream file_;
 };
+
+void PrintLexemeVector(const std::vector<Lexeme> &symbol_table, std::ostream &stream);
+
+}
 
 #endif  // CSCCOMPILER_LEX_H_

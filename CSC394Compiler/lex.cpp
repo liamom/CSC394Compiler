@@ -1,8 +1,11 @@
 #include "lex.h"
+#include <iomanip>
 
-std::vector<Lex::Lexeme> Lex::Analyze(const std::string &file_path) {
+using namespace LexAnalyzer;
+
+std::vector<Lexeme> Analyzer::Analyze(const std::string &file_path) {
   file_.open(file_path, std::fstream::in);
-  std::vector<Lex::Lexeme> symbol_table;
+  std::vector<Lexeme> symbol_table;
 
   if (file_.is_open()){
     Lexeme lexeme;
@@ -18,7 +21,7 @@ std::vector<Lex::Lexeme> Lex::Analyze(const std::string &file_path) {
   return symbol_table;
 }
 
-Lex::Lexeme Lex::GetNextLexeme() {
+Lexeme Analyzer::GetNextLexeme() {
   char c = GetNextNonBlankChar();
   CharClass char_class = CharClassOf(c);
 
@@ -53,6 +56,10 @@ Lex::Lexeme Lex::GetNextLexeme() {
 		break;
 	case CharClass::kUnknown: //Parentheses and operators
     lexeme.token = TokenOf(c);
+    if (lexeme.token == Token::kDeclarer || lexeme.token == Token::kAssignOp) {
+      c = GetNextChar();
+      lexeme.addChar(c);
+    }
 		break;
 	case CharClass::kEof:
     lexeme.token = Token::kEof;
@@ -65,7 +72,7 @@ Lex::Lexeme Lex::GetNextLexeme() {
 	return lexeme;
 }
 
-char Lex::GetNextNonBlankChar() {
+char Analyzer::GetNextNonBlankChar() {
   char c = '\0';
 
   do
@@ -76,7 +83,7 @@ char Lex::GetNextNonBlankChar() {
   return c;
 }
 
-char Lex::GetNextChar() {
+char Analyzer::GetNextChar() {
   //read next char
   char c = '\0';
 
@@ -86,7 +93,7 @@ char Lex::GetNextChar() {
   return c;
 }
 
-Lex::CharClass Lex::CharClassOf(const char c)
+CharClass Analyzer::CharClassOf(const char c)
 {
   //check if end of file
   if (c == '\0') 
@@ -102,16 +109,14 @@ Lex::CharClass Lex::CharClassOf(const char c)
     return CharClass::kUnknown;
 }
 
-Lex::Token Lex::TokenOf(const char ch) {
+Token Analyzer::TokenOf(const char ch) {
   switch (ch) {
   case '<':
-    if (GetNextChar() == '=')
+    if (file_.peek() == '=')
       return Token::kAssignOp;
   case '-':
-    if (file_.peek() == '>') {
-      GetNextChar();
+    if (file_.peek() == '>') 
       return Token::kDeclarer;
-    }
     else
       return Token::kSubOp;
   case '+':
@@ -121,13 +126,16 @@ Lex::Token Lex::TokenOf(const char ch) {
   case ')':
   case ';':
   case '.':
+  case ',':
     return static_cast<Token>(ch);
   default:
     return Token::kEof;
   }
+
+  return Token::kEof;
 }
 
-Lex::Token Lex::StringToToken(const Lexeme &lexeme)
+Token Analyzer::StringToToken(const Lexeme &lexeme)
 {
   if (lexeme == "program")
     return Token::kProgram;
@@ -139,4 +147,20 @@ Lex::Token Lex::StringToToken(const Lexeme &lexeme)
     return Token::kInteger;
   else
     return Token::kId;
+}
+
+void LexAnalyzer::PrintLexemeVector(const std::vector<Lexeme> &symbol_table, std::ostream &stream)
+{
+  if (symbol_table.empty())
+    stream << ("ERROR - cannot open front.in \n");
+  else {
+    for (auto &lexeme : symbol_table) {
+      if (lexeme.in_error_state)
+        stream << "Error - lexeme is too long \n";
+      else
+        stream << "Next token is: " << std::setw(4)
+        << (int)lexeme.token
+        << ", Next lexeme is " << lexeme << "\n";
+    }
+  }
 }

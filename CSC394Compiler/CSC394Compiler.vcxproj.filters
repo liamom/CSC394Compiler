@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="program2.in" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -36,5 +37,7 @@
   <ItemGroup>
     <None Include="front.in" />
     <None Include="ClassDiagram.cd" />
+    <None Include="program1.in" />
+    <None Include="program3.in" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "lex.h"
+#include "parser.h"
 
 #include <algorithm>
 
@@ -19,14 +20,10 @@ int main()
     std::vector<LexAnalyzer::Lexeme> symbol_table
       = lex.Analyze(file);
 
-    LexAnalyzer::PrintLexemeVector(symbol_table, std::cout);
+    Parser parser;
+    parser.Parse(symbol_table, &std::cout);
 
-    std::cout << "symbol table" << std::endl;
-    symbol_table.erase(std::remove_if(symbol_table.begin(), symbol_table.end(), [](LexAnalyzer::Lexeme &a) {return a.token != LexAnalyzer::Token::kId; }), symbol_table.end());
-    std::sort(symbol_table.begin(), symbol_table.end());
-    auto it = std::unique(symbol_table.begin(), symbol_table.end());
-    symbol_table.resize(std::distance(symbol_table.begin(), it));
-    LexAnalyzer::PrintLexemeVector(symbol_table, std::cout);
+    //LexAnalyzer::PrintLexemeVector(symbol_table, std::cout);
   }
 
   char a;

@@ -3,8 +3,16 @@
 
 using namespace LexAnalyzer;
 
-std::vector<Lexeme> Analyzer::Analyze(const std::string &file_path) {
+bool LexAnalyzer::Analyzer::open(const std::string &file_path)
+{
+  if (file_.is_open())
+    file_.close();
+
   file_.open(file_path, std::fstream::in);
+  return file_.is_open();
+}
+
+std::vector<Lexeme> Analyzer::Analyze() {
   std::vector<Lexeme> symbol_table;
 
   if (file_.is_open()){
@@ -19,6 +27,12 @@ std::vector<Lexeme> Analyzer::Analyze(const std::string &file_path) {
 
   file_.close();
   return symbol_table;
+}
+
+std::vector<Lexeme> LexAnalyzer::Analyzer::Analyze(const std::string & file_path)
+{
+  open(file_path);
+  return Analyze();
 }
 
 Lexeme Analyzer::GetNextLexeme() {

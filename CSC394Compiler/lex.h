@@ -57,19 +57,27 @@ class Analyzer
 {
 public:
 
+  bool open(const std::string &file_path);
+
   /// <summary>
   /// Reads a file and outputs each lexeme in order to an ostream.
   /// </summary>
-  /// <param name="file_path">path of file to analyze</param>
+  /// <returns>Symbol table</returns>
+  std::vector<Lexeme> Analyze();
+
+  /// <summary>
+  /// Reads a file and outputs each lexeme in order to an ostream.
+  /// </summary>
   /// <returns>Symbol table</returns>
   std::vector<Lexeme> Analyze(const std::string &file_path);
 
-private:
   /// <summary>
   /// Get next lexeme from file
   /// </summary>
   /// <returns></returns>
   Lexeme GetNextLexeme();
+
+private:
   /// <summary>
   /// Get next character that isn't whitespace
   /// </summary>

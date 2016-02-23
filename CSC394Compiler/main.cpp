@@ -1,6 +1,8 @@
 #include <iostream>
 #include "lex.h"
 
+#include <algorithm>
+
 int main() 
 {
   std::vector<std::string> file_list{ 
@@ -18,8 +20,15 @@ int main()
       = lex.Analyze(file);
 
     LexAnalyzer::PrintLexemeVector(symbol_table, std::cout);
+
+    std::cout << "symbol table" << std::endl;
+    symbol_table.erase(std::remove_if(symbol_table.begin(), symbol_table.end(), [](LexAnalyzer::Lexeme &a) {return a.token != LexAnalyzer::Token::kId; }), symbol_table.end());
+    std::sort(symbol_table.begin(), symbol_table.end());
+    auto it = std::unique(symbol_table.begin(), symbol_table.end());
+    symbol_table.resize(std::distance(symbol_table.begin(), it));
+    LexAnalyzer::PrintLexemeVector(symbol_table, std::cout);
   }
 
-	char a;
-	std::cin >> a;
+  char a;
+  std::cin >> a;
 }

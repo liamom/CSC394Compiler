@@ -9,13 +9,13 @@ std::vector<Lexeme> Analyzer::Analyze(const std::string &file_path) {
 
   if (file_.is_open()){
     Lexeme lexeme;
-		do {
+    do {
       lexeme = GetNextLexeme();
       //move empties lexeme so the value of its token 
       //needs to be checked in the array
       symbol_table.emplace_back(std::move(lexeme));
-		} while (symbol_table.back().token != Token::kEof);
-	}
+    } while (symbol_table.back().token != Token::kEof);
+  }
 
   file_.close();
   return symbol_table;
@@ -29,47 +29,47 @@ Lexeme Analyzer::GetNextLexeme() {
   if(char_class != CharClass::kEof)
     lexeme.addChar(c);
 
-	switch (char_class) {
+  switch (char_class) {
   case CharClass::kUnderscore:
-	case CharClass::kLetter:
+  case CharClass::kLetter:
     char_class = CharClassOf(file_.peek());
     while (char_class == CharClass::kLetter 
       || char_class == CharClass::kDidit
       || char_class == CharClass::kUnderscore)
-		{
-			c = GetNextChar();
+    {
+      c = GetNextChar();
       lexeme.addChar(c);
       char_class = CharClassOf(file_.peek());
     }
 
     lexeme.token = StringToToken(lexeme);
-		break;
-	case CharClass::kDidit:
+    break;
+  case CharClass::kDidit:
     char_class = CharClassOf(file_.peek());
     while (char_class == CharClass::kDidit) 
     {
-			c = GetNextChar();
+      c = GetNextChar();
       lexeme.addChar(c);
       char_class = CharClassOf(file_.peek());
     } 
     lexeme.token = Token::kIntLiteral;
-		break;
-	case CharClass::kUnknown: //Parentheses and operators
+    break;
+  case CharClass::kUnknown: //Parentheses and operators
     lexeme.token = TokenOf(c);
     if (lexeme.token == Token::kDeclarer || lexeme.token == Token::kAssignOp) {
       c = GetNextChar();
       lexeme.addChar(c);
     }
-		break;
-	case CharClass::kEof:
+    break;
+  case CharClass::kEof:
     lexeme.token = Token::kEof;
     lexeme.push_back('E');
     lexeme.push_back('O');
     lexeme.push_back('F');
-		break;
-	}
+    break;
+  }
 
-	return lexeme;
+  return lexeme;
 }
 
 char Analyzer::GetNextNonBlankChar() {

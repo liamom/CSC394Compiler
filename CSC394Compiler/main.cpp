@@ -6,8 +6,10 @@
 
 int main() 
 {
-  std::vector<std::string> file_list{ 
-    "../CSC394Compiler/front.in",
+  std::vector<std::string> file_list{
+    "../CSC394Compiler/error1.in",
+    "../CSC394Compiler/error2.in",
+    "../CSC394Compiler/error3.in",
     "../CSC394Compiler/program1.in",
     "../CSC394Compiler/program2.in",
     "../CSC394Compiler/program3.in" };
@@ -21,7 +23,8 @@ int main()
       = lex.Analyze(file);
 
     Parser parser;
-    parser.Parse(symbol_table, &std::cout);
+    bool has_error = parser.Parse(symbol_table, &std::cout);
+    std::cout << "has error: " << (has_error ? "true" : "false") << std::endl;
 
     //LexAnalyzer::PrintLexemeVector(symbol_table, std::cout);
   }

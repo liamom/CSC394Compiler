@@ -17,6 +17,7 @@
   <ItemGroup>
     <Text Include="ReadMe.txt" />
     <Text Include="program2.in" />
+    <Text Include="error2.in" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -26,6 +27,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="token.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -39,11 +43,16 @@
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="token.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="front.in" />
     <None Include="ClassDiagram.cd" />
     <None Include="program1.in" />
     <None Include="program3.in" />
+    <None Include="error1.in" />
+    <None Include="error3.in" />
   </ItemGroup>
 </Project>

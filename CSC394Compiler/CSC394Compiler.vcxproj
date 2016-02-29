@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="error2.in" />
     <Text Include="program2.in" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
@@ -153,14 +154,18 @@
     <ClInclude Include="Lex.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="token.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lex.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
+    <ClCompile Include="token.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="error1.in" />
+    <None Include="error3.in" />
     <None Include="front.in" />
     <None Include="program1.in" />
     <None Include="program3.in" />

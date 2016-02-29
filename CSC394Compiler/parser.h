@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <ostream>
+#include <set>
 
 #include "Lex.h"
 
@@ -24,7 +25,9 @@ private:
   bool expression();
   bool expression_prime();
   bool term();
-  bool id();
+  bool id_declare();
+  bool id_use();
+  bool id_keyword();
   bool op(LexAnalyzer::Token token);
   bool null(LexAnalyzer::Token expected_token);
 
@@ -34,5 +37,7 @@ private:
   int file_position = 0;
   const std::vector<LexAnalyzer::Lexeme> *file_;
   std::ostream *log_;
+  std::set<LexAnalyzer::Lexeme> symbols_;
+  bool has_error_ = false;
 };
 

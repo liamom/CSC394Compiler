@@ -1,0 +1,6 @@
+program sample11;
+  integer -> num1;
+begin
+  num1 <= 5
+  num1 <= num1 + 5
+end.

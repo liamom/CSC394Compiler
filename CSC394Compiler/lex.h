@@ -1,6 +1,8 @@
 #ifndef CSCCOMPILER_LEX_H_
 #define CSCCOMPILER_LEX_H_
 
+#include "token.h"
+
 #include <ostream>
 #include <fstream>
 #include <string>
@@ -15,27 +17,6 @@ enum class CharClass {
   kUnderscore,
   kUnknown,
   kEof = EOF //-1
-};
-
-enum class Token : char {
-  kProgram = 0,
-  kBegin = 1,
-  kEnd = 2,
-  kIntLiteral = 3,
-  kId = 4,
-  kInteger = 5,
-  kDeclarer = 6,    // '->'
-  kAssignOp = '<',  // '<='   
-  kAddOp = '+',
-  kSubOp = '-',
-  kMultOp = '*',
-  kDivOp = '/',
-  kLeftParen = '(',
-  kRightParen = ')',
-  kSemiColon = ';',
-  kPeriod = '.',
-  kComma = ',',
-  kEof = EOF  //-1
 };
 
 class Lexeme : public std::string

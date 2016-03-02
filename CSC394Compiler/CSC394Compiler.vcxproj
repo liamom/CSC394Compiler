@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="error2.in" />
+    <Text Include="output.txt" />
     <Text Include="program2.in" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>

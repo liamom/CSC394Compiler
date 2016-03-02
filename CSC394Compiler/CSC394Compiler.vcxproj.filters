@@ -18,6 +18,7 @@
     <Text Include="ReadMe.txt" />
     <Text Include="program2.in" />
     <Text Include="error2.in" />
+    <Text Include="output.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">

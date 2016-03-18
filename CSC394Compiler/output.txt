@@ -1,70 +1,3 @@
-../CSC394Compiler/error1.in
-entering <program>
-entering <declaration>
-entering <id_list>
-entering <id_list_prime>
-exit <id_list_prime>
-exit <id_list>
-exit <declaration>
-entering <body>
-entering <stat_list>
-entering <assign>
-ERROR -- identifier num4 used before declaration.
-exit <assign>
-exit <stat_list>
-exit <body>
-exit <program>
-has error: true
-../CSC394Compiler/error2.in
-entering <program>
-entering <declaration>
-entering <id_list>
-entering <id_list_prime>
-exit <id_list_prime>
-exit <id_list>
-exit <declaration>
-entering <body>
-entering <stat_list>
-entering <assign>
-entering <expression>
-entering <term>
-exit <term>
-entering <expression_prime>
-exit <expression_prime>
-exit <expression>
-exit <assign>
-entering <stat_list_prime>
-exit <stat_list_prime>
-exit <stat_list>
-exit <body>
-ERROR -- expected token . found:  
-exit <program>
-has error: true
-../CSC394Compiler/error3.in
-entering <program>
-entering <declaration>
-entering <id_list>
-entering <id_list_prime>
-exit <id_list_prime>
-exit <id_list>
-exit <declaration>
-entering <body>
-entering <stat_list>
-entering <assign>
-entering <expression>
-entering <term>
-exit <term>
-entering <expression_prime>
-exit <expression_prime>
-exit <expression>
-exit <assign>
-entering <stat_list_prime>
-exit <stat_list_prime>
-exit <stat_list>
-ERROR -- expected token End found: ID
-exit <body>
-exit <program>
-has error: true
 ../CSC394Compiler/program1.in
 entering <program>
 entering <declaration>
@@ -102,21 +35,48 @@ entering <expression>
 entering <term>
 exit <term>
 entering <expression_prime>
-entering <term>
-exit <term>
 entering <expression>
 entering <term>
 exit <term>
+entering <expression_prime>
+exit <expression_prime>
 exit <expression>
 exit <expression_prime>
 exit <expression>
 exit <assign>
+entering <stat_list_prime>
+entering <assign>
+exit <assign>
+exit <stat_list_prime>
 exit <stat_list_prime>
 exit <stat_list_prime>
 exit <stat_list>
 exit <body>
 exit <program>
-has error: false
+*******Code Generation*******
+INT <num1> 100
+INT <num2> 101
+INT <num3> 102
+PUSH 2
+POP num1 100
+PUSH 3
+POP num2 101
+PUSH num1 100
+PUSH num2 101
+ADD
+POP num3 102
+****************************
+***Compilation Successful***
+****************************
+symbol_table:
+begin keyword
+integer keyword
+num1 integer
+num2 integer
+program program
+num1 integer 100
+num2 integer 101
+num3 integer 102
 ../CSC394Compiler/program2.in
 entering <program>
 entering <declaration>
@@ -136,19 +96,89 @@ entering <expression>
 entering <term>
 exit <term>
 entering <expression_prime>
-entering <term>
-exit <term>
 entering <expression>
 entering <term>
 exit <term>
+entering <expression_prime>
+entering <expression>
+entering <term>
+exit <term>
+entering <expression_prime>
+exit <expression_prime>
+exit <expression>
+exit <expression_prime>
 exit <expression>
 exit <expression_prime>
 exit <expression>
 exit <assign>
+entering <stat_list_prime>
+entering <assign>
+entering <expression>
+entering <term>
+exit <term>
+entering <expression_prime>
+entering <expression>
+entering <term>
+exit <term>
+entering <expression_prime>
+exit <expression_prime>
+exit <expression>
+exit <expression_prime>
+exit <expression>
+exit <assign>
+entering <stat_list_prime>
+entering <assign>
+entering <expression>
+entering <term>
+exit <term>
+entering <expression_prime>
+entering <expression>
+entering <term>
+exit <term>
+entering <expression_prime>
+exit <expression_prime>
+exit <expression>
+exit <expression_prime>
+exit <expression>
+exit <assign>
+entering <stat_list_prime>
+entering <assign>
+exit <assign>
+exit <stat_list_prime>
+exit <stat_list_prime>
+exit <stat_list_prime>
 exit <stat_list>
 exit <body>
 exit <program>
-has error: false
+*******Code Generation*******
+INT <num1> 100
+INT <num2> 101
+INT <num3> 102
+PUSH 2
+PUSH 3
+PUSH 5
+ADD
+ADD
+POP num1 100
+PUSH 10
+PUSH num1 100
+SUB
+POP num2 101
+PUSH num1 100
+PUSH num1 100
+ADD
+POP num3 102
+****************************
+***Compilation Successful***
+****************************
+symbol_table:
+begin keyword
+integer keyword
+num1 integer
+program program
+num1 integer 100
+num2 integer 101
+num3 integer 102
 ../CSC394Compiler/program3.in
 entering <program>
 entering <declaration>
@@ -186,18 +216,52 @@ entering <expression>
 entering <term>
 exit <term>
 entering <expression_prime>
-entering <term>
-exit <term>
 entering <expression>
 entering <term>
 exit <term>
+entering <expression_prime>
+entering <expression>
+entering <term>
+exit <term>
+entering <expression_prime>
+exit <expression_prime>
+exit <expression>
+exit <expression_prime>
 exit <expression>
 exit <expression_prime>
 exit <expression>
 exit <assign>
+entering <stat_list_prime>
+entering <assign>
+exit <assign>
+exit <stat_list_prime>
 exit <stat_list_prime>
 exit <stat_list_prime>
 exit <stat_list>
 exit <body>
 exit <program>
-has error: false
+*******Code Generation*******
+INT <base> 100
+INT <power> 101
+INT <out> 102
+PUSH 5
+POP base 100
+PUSH 3
+POP power 101
+PUSH base 100
+PUSH base 100
+PUSH base 100
+ADD
+ADD
+POP out 102
+****************************
+***Compilation Successful***
+****************************
+symbol_table:
+base integer
+begin keyword
+integer keyword
+program program
+base integer 100
+out integer 102
+power integer 101
